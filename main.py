@@ -1,10 +1,23 @@
 import logging
+import os
+
 from telegram import Update, ChatPermissions
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, CallbackContext
 
 from check_message import check_message
 
-BOT_TOKEN = '7936423628:AAFkiHLY-QtrNEf6BqFcPgFzrtUp7e-2arg'
+TOKEN_FILE = "token.txt"
+
+def load_token():
+    try:
+        with open(TOKEN_FILE, 'r') as file:
+            token = file.read().strip()
+            return token
+    except FileNotFoundError:
+        print("Token file not found.")
+        return None
+
+BOT_TOKEN = load_token()
 ADMIN_CHAT_ID = -1
 
 async def handle_group_message(update: Update, context: CallbackContext):

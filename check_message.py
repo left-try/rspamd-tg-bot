@@ -5,7 +5,7 @@ def check_message(update: Update, context: CallbackContext):
     message = parse_message(update, context)
     #TODO
     print(message)
-    return True
+    return False
 
 def parse_message(update: Update, context: CallbackContext):
     chat_id = update.message.chat_id

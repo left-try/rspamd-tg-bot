@@ -33,9 +33,6 @@ async def handle_group_message(update: Update, context: CallbackContext):
         spam_msg_id = update.message.id
         spam_user = update.message.from_user
         group = update.effective_chat
-        print(group.effective_name)
-        print(spam_user.username)
-        print(update.message)
         await context.bot.delete_message(group.id, spam_msg_id)
         await context.bot.send_message(
             chat_id=admin_chat_id,

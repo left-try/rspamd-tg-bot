@@ -1,13 +1,20 @@
 import logging
 import os
 
-from telegram import Update, ChatPermissions
+from telegram import Update, ChatPermissions, ReplyKeyboardMarkup
 from telegram.constants import ChatType
-from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, CallbackContext
+from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, CallbackContext, \
+    ConversationHandler
 
 from check_message import check_message
 
 TOKEN_FILE = "token.txt"
+START = range(3)
+
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
+)
+logger = logging.getLogger(__name__)
 
 def load_token():
     try:
@@ -35,10 +42,15 @@ async def handle_group_message(update: Update, context: CallbackContext):
             text=f"Message {spam_msg_id} in group {group.effective_name}:  was deleted. Sender: {spam_user.username}"
         )
 
+
 async def start(update: Update, context: CallbackContext):
+    keyboard = [[
+        "/start"
+    ]]
+    reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
     global admin_chat_id
     admin_chat_id = update.message.chat_id
-    await context.bot.send_message(chat_id=admin_chat_id, text="Bot set up.")
+    await context.bot.send_message(chat_id=admin_chat_id, text="Bot set up.", reply_markup=reply_markup)
 
 def main():
     token = load_token()

@@ -6,7 +6,7 @@ from check_message import check_message
 admin_chat_id = -1
 
 async def handle_group_message(update: Update, context: CallbackContext):
-    result = check_message(update, context)
+    result = await check_message(update, context)
     if not result:
         spam_msg_id = update.message.id
         spam_user = update.message.from_user

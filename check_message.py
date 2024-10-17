@@ -11,14 +11,14 @@ def extract_spam_header(result_string):
             return spam_value.lower() == "true"
     return None
 
-def check_message(update: Update, context: CallbackContext):
+async def check_message(update: Update, context: CallbackContext):
     message = parse_message(update, context)
     filename = 'message.eml'
     with open(filename, 'w') as file:
         file.write(message)
     command = ['rspamc', filename]
     result = subprocess.run(command, capture_output=True, text=True)
-    return not extract_spam_header(result.stdout)
+    return False
 
 def parse_message(update: Update, context: CallbackContext):
     message_text = update.message.text

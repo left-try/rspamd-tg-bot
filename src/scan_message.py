@@ -13,7 +13,7 @@ def extract_spam_header(result_string):
 
 async def check_message(update: Update, context: CallbackContext):
     message = parse_message(update, context)
-    filename = 'message.eml'
+    filename = '../message.eml'
     with open(filename, 'w') as file:
         file.write(message)
     command = ['rspamc', filename]

@@ -1,8 +1,8 @@
 from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import CallbackContext
 
-from check_message import check_message
-from db import set_up_redis
+from src.scan_message import check_message
+from src.db import set_up_redis
 
 
 async def handle_group_message(update: Update, context: CallbackContext):

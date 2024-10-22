@@ -3,7 +3,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, fil
 
 from handle_commands import start, handle_group_message
 
-TOKEN_FILE = "token.txt"
+TOKEN_FILE = "../token.txt"
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
